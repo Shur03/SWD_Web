@@ -20,13 +20,14 @@
 		<url-pattern>/Login</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>TransactionController</servlet-name>
-		<servlet-class>controller.TransactionControllerServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>TransactionController</servlet-name>
-		<url-pattern>/TransactionControllerServlet</url-pattern>
-	</servlet-mapping>
+    <servlet-name>TransactionControllerServlet</servlet-name>
+    <servlet-class>controller.TransactionControllerServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>TransactionControllerServlet</servlet-name>
+    <url-pattern>/TransactionControllerServlet</url-pattern>
+</servlet-mapping>
+
 	<servlet>
 		<servlet-name>BankLoginServlet</servlet-name>
 		<servlet-class>IOL.BankLoginServlet</servlet-class>

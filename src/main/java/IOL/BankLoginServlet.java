@@ -32,7 +32,9 @@ public class BankLoginServlet extends HttpServlet {
         Customer customer = authenticate(username, password);
         if (customer != null) {
             // Successful login
-            request.getSession().setAttribute("customer", customer);
+            request.getSession().setAttribute("customer", customer);           
+            request.getSession().setAttribute("loggedInAccount", customer.getAccount());
+
             response.sendRedirect("bankMain.jsp");
         } else {
             // Invalid credentials

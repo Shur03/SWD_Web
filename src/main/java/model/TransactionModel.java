@@ -40,7 +40,7 @@ public class TransactionModel {
                 try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
                         transaction.setId(generatedKeys.getInt(1));
-//                        updateAccountBalance(transaction);
+                        updateAccountBalance(transaction);
                         return true;
                     }
                 }
@@ -53,16 +53,10 @@ public class TransactionModel {
     }
 
     private void updateAccountBalance(Transaction transaction) throws Exception {
-        double newBalance = calculateNewBalance(transaction.getAcc().getBalance(), transaction);
-
-        // Update account object
-        transaction.getAcc().setBalance(newBalance);
-
-        // Update database
         try (Connection conn = DatabaseConnection.getConnection()) {
             String updateBalanceQuery = "UPDATE Account SET balance = ? WHERE id = ?";
             try (PreparedStatement stmt = conn.prepareStatement(updateBalanceQuery)) {
-                stmt.setDouble(1, newBalance);
+                stmt.setDouble(1, transaction.getAcc().getBalance());
                 stmt.setString(2, transaction.getAcc().getAccountId());
                 stmt.executeUpdate();
             }
@@ -72,30 +66,4 @@ public class TransactionModel {
         }
     }
 
-    private double calculateNewBalance(double currentBalance, Transaction transaction) {
-        if ("Income".equalsIgnoreCase(transaction.getCategory()) || "Saving".equalsIgnoreCase(transaction.getCategory())) {
-            return currentBalance + transaction.getAmount();
-        } else if ("Expense".equalsIgnoreCase(transaction.getCategory())) {
-            return currentBalance - transaction.getAmount();
-        }
-        return currentBalance;
-    }
-    public Account getAccountById(String accountId) throws Exception {
-        try (Connection conn = DatabaseConnection.getConnection()) {
-            String query = "SELECT id, balance FROM Account WHERE id = ?";
-            try (PreparedStatement stmt = conn.prepareStatement(query)) {
-                stmt.setString(1, accountId);
-                try (ResultSet rs = stmt.executeQuery()) {
-                    if (rs.next()) {
-                        String id = rs.getString("id");
-                        double balance = rs.getDouble("balance");
-                        return new Account(id, balance);
-                    }
-                }
-            }
-        } catch (Exception e) {
-            throw new Exception("Error retrieving account by ID: " + e.getMessage(), e);
-        }
-        return null; // Return null if account is not found
-    }
 }

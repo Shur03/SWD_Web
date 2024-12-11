@@ -11,6 +11,7 @@ if (customer == null || customer.getAccount() == null) {
 	return;
 }
 Account account = customer.getAccount();
+
 String selectedType = request.getParameter("type"); // Get selected type if the form is being re-rendered
 %>
 <!DOCTYPE html>
@@ -19,63 +20,7 @@ String selectedType = request.getParameter("type"); // Get selected type if the 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Transaction Form</title>
-<style>
-body {
-	font-family: Arial, sans-serif;
-	margin: 0;
-	padding: 20px;
-	background-color: #f4f4f9;
-}
-
-.form-container {
-	max-width: 400px;
-	margin: 0 auto;
-	padding: 20px;
-	background: #fff;
-	border-radius: 8px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.form-container h1 {
-	margin-bottom: 20px;
-}
-
-.form-group {
-	margin-bottom: 15px;
-}
-
-.form-group label {
-	display: block;
-	margin-bottom: 5px;
-}
-
-.form-group input, .form-group select {
-	width: 100%;
-	padding: 10px;
-	box-sizing: border-box;
-}
-
-.btn {
-	display: block;
-	width: 100%;
-	padding: 10px;
-	background: #007bff;
-	color: #fff;
-	text-align: center;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-}
-
-.btn:hover {
-	background: #0056b3;
-}
-
-/* Hide fields based on transaction type */
-#paymentMethodField, #sourceField, #goalField {
-	display: none;
-}
-</style>
+<link href="css/transView.css" rel="stylesheet">
 <script>
 	function toggleFields() {
 		const category = document.getElementById('category').value;
@@ -102,15 +47,19 @@ body {
 
 	// Call toggleFields on page load to adjust visibility based on selected type
 	window.onload = function() {
-		toggleFields();
-		// Set the transaction date field to today's date by default
-		const transactionDateInput = document.getElementById("transactionDate");
-		const today = new Date();
-		const yyyy = today.getFullYear();
-		const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
-		const dd = String(today.getDate()).padStart(2, '0');
-		transactionDateInput.value = `${yyyy}-${mm}-${dd}`;
-	};
+    toggleFields(); // This function handles visibility of other fields
+
+    // Set the transaction date field to today's date by default
+    const transactionDateInput = document.getElementById("transactionDate");
+    const today = new Date(); // Get today's date
+    const yyyy = today.getFullYear(); // Get the current year (e.g., 2024)
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); // Get the current month, adjusted for 0-based index
+    const dd = String(today.getDate()).padStart(2, '0'); // Get the current day of the month, padded to 2 digits
+
+    // Set the value of the transaction date input field
+    transactionDateInput.value = `${yyyy}-${mm}-${dd}`;
+};
+
 </script>
 </head>
 <body>
@@ -125,7 +74,6 @@ body {
 			<div class="form-group">
 				<label for="category">Transaction Type:</label> <select
 					id="category" name="category" onchange="toggleFields()" required>
-					s
 					<option value="Expense">Expense</option>
 					<option value="Income">Income</option>
 					<option value="Saving">Saving</option>

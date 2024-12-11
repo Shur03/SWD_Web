@@ -29,58 +29,68 @@ public class TransactionServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, jakarta.servlet.ServletException {
         try {
+            // Retrieve the logged-in account from the session
+            HttpSession session = request.getSession(false); // Get the existing session, if available
+            if (session == null || session.getAttribute("loggedInAccount") == null) {
+                throw new IllegalStateException("No logged-in account found. Please log in.");
+            }
+
+            Account loggedInAccount = (Account) session.getAttribute("loggedInAccount");
+
+            // Transaction details from the request
             String category = request.getParameter("category");
             if (category == null || category.isEmpty()) {
                 throw new IllegalArgumentException("Transaction category is required.");
             }
 
-            String accountId = request.getParameter("accountId");
             double amount = Double.parseDouble(request.getParameter("amount"));
             String description = request.getParameter("description");
             String transactionDateString = request.getParameter("transactionDate");
             LocalDate transactionDate = LocalDate.parse(transactionDateString);
 
-            // Fetch the account and its current balance
-            Account account = transactionController.model.getAccountById(accountId); // Assume this method exists in the controller
-            if (account == null) {
-                throw new IllegalArgumentException("Account not found with ID: " + accountId);
-            }
-            double currentBalance = account.getBalance();
-            System.out.println(currentBalance);// Retrieve current balance
-
-            // Create transaction object
+            // Use the logged-in account
             Transaction transaction;
             switch (category) {
                 case "Income": {
                     String sourceStr = request.getParameter("source");
                     Source source = Source.valueOf(sourceStr);
-                    currentBalance += amount; 
-                    // Add amount to the balance
-                    transaction = new Income(category, currentBalance, transactionDate, description, account, source);
+                    double newBalance = loggedInAccount.getBalance() + amount;
+                    if (newBalance < 0) {
+                        throw new IllegalArgumentException("Insufficient balance for this transaction.");
+                    }
+                    loggedInAccount.setBalance(newBalance); // Update the account balance
+                    transaction = new Income(category, amount, transactionDate, description, loggedInAccount, source);
                     break;
                 }
                 case "Expense": {
                     String paymentMethodStr = request.getParameter("paymentMethod");
                     PaymentMethod method = PaymentMethod.valueOf(paymentMethodStr);
-                    currentBalance -= amount; // Subtract amount from the balance
-                    transaction = new Expense(category, currentBalance, transactionDate, description, account, method);
+                    double newBalance = loggedInAccount.getBalance() - amount;
+                    if (newBalance < 0) {
+                        throw new IllegalArgumentException("Insufficient balance for this transaction.");
+                    }
+                    loggedInAccount.setBalance(newBalance); // Update the account balance
+                    transaction = new Expense(category, amount, transactionDate, description, loggedInAccount, method);
                     break;
                 }
                 case "Saving": {
                     String goal = request.getParameter("goal");
-                    currentBalance += amount; // Add amount to the balance
-                    transaction = new Saving(category, currentBalance, transactionDate, description, account, goal);
+                    double newBalance = loggedInAccount.getBalance() + amount;
+                    if (newBalance < 0) {
+                        throw new IllegalArgumentException("Insufficient balance for this transaction.");
+                    }
+                    loggedInAccount.setBalance(newBalance); // Update the account balance
+                    transaction = new Saving(category, amount, transactionDate, description, loggedInAccount, goal);
                     break;
                 }
                 default:
                     throw new IllegalArgumentException("Invalid transaction category.");
             }
 
-            // Update account balance and register the transaction
-            account.setBalance(currentBalance); // Update the account object with the new balance
+            // Register the transaction
             String result = transactionController.registerTrans(transaction);
 
-            // Set result and forward to JSP
+            // Pass result back to the JSP page
             request.setAttribute("result", result);
             request.getRequestDispatcher("/bankMain.jsp").forward(request, response);
         } catch (Exception e) {
