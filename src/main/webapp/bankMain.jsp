@@ -32,6 +32,7 @@ TransactionDAO dao = new TransactionDAO();
 		<h1>
 			Welcome,
 			<%=customer.getUserName()%></h1>
+			<div class="space"></div>
 		<div class="account-info">
 			<p>
 				<strong>Account ID:</strong> <span><%=loggedInAccount.getAccountId()%></span>

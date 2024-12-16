@@ -4,11 +4,11 @@ body {
 	margin: 0;
 	padding: 0;
 	background-color: #f0f5f9;
-	color: #333;
+	color: rgb(255, 255, 255);
 	background-image: url('../img/mnyh.jpg');
 }
 
-.header {
+.header, record {
 	background-color: #4cafef;
 	color: white;
 	padding: 20px;
@@ -19,6 +19,7 @@ body {
 	border-radius: 2%;
 	width: 70%;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	justify-content: space-between;
 }
 
 .header img {
@@ -55,12 +56,15 @@ body {
 	font-size: 18px;
 	margin: 10px 0;
 }
-
+.space{
+	width : 200px;
+}
 .account-info {
 	padding: 15px;
 	border-radius: 12px;
 	text-align: right;
-	justify-content: right;
+	/*justify-content: right;*/	
+	margin-left: auto;
 }
 
 .account-info p {
@@ -94,7 +98,10 @@ body {
 	background-color: #357abc;
 	transform: scale(1.05);
 }
-
+/*.record{
+	color : white;
+	background-color : #4cafef;
+*/
 .footer {
 	margin-left: 200px;
 	align-items: center;
@@ -104,5 +111,5 @@ body {
 	padding: 20px;
 	margin-top: 30px;
 	border-top: 1px solid #ddd;
-	background-color: #f1f1f1;
+	background-color: #4cafef;
 }
