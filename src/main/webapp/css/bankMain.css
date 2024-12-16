@@ -4,24 +4,22 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f5f9;
-    color: rgb(255, 255, 255);
+    background-color: #00a3ff;
+    color: white;
     background-image: url('../img/mnyh.jpg');
     background-size: cover;
     background-position: center;
+    font-size: 16px;
 }
 
-.header, .record {
-    background-color: rgba(76, 175, 239, 0.9); /* Light blue with transparency */
+.header, .record, .footer {
+     backdrop-filter: blur(50px); /* Blue with slight transparency */
     color: white;
     padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 2%;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
     width: 70%;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-left: 15%;
+    margin: 20px auto;
 }
 
 .header img {
@@ -33,60 +31,48 @@ body {
 }
 
 .header h1 {
-    font-size: 24px;
+    font-size: 26px;
+    font-weight: 600;
     margin: 0;
+}
+
+.account-info {
+    text-align: right;
+    margin-top: 10px;
+}
+
+.account-info p {
+    margin: 5px 0;
+    font-size: 16px;
 }
 
 .main-content {
     padding: 20px;
     max-width: 70%;
-    margin: 20px auto;
-    background-color: rgba(156, 234, 236, 0.9); /* Light cyan */
+    margin: 20px auto;/* Light blue background */
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
-.main-content h2 {
-    font-size: 22px;
-    margin-bottom: 15px;
-    color: #4cafef;
-}
 
-.main-content p {
-    font-size: 18px;
+.transaction-item {
+	background-color : #007bff;
+    padding: 15px;
+    border-radius: 8px;
     margin: 10px 0;
 }
 
-.space {
-    width: 200px;
-}
-
-.account-info {
-    padding: 15px;
-    border-radius: 12px;
-    text-align: right;
-    margin-left: auto;
-}
-
-.account-info p {
+.transaction-item p {
+	 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    color :  white;
     margin: 5px 0;
 }
 
-.grid-buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    text-align: center;
-}
-
 .grid-buttons a {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
     padding: 15px;
-    background-color: #4cafef;
+    background-color: #007bff;
     color: white;
     text-decoration: none;
     font-size: 14px;
@@ -96,43 +82,24 @@ body {
 }
 
 .grid-buttons a:hover {
-    background-color: #357abc;
+    background-color: #0056b3;
     transform: scale(1.05);
 }
 
-.transaction-item {
-    background-color: white;
-    padding: 15px;
-    border-radius: 8px;
-    margin: 10px 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    color: #333;
-}
-
-.transaction-item p {
-    font-size: 16px;
-    margin: 5px 0;
-}
-
 .footer {
-    width: 70%;
-    padding: 20px;
-    margin-top: 30px;
-    background-color: #4cafef;
-    color: white;
     text-align: center;
+    font-family :  'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px;
     border-top: 1px solid #ddd;
-    border-radius: 2%;
-    margin-left: 15%;
+    border-radius: 12px;
 }
 
 @media (max-width: 768px) {
     .header, .main-content, .footer {
         width: 90%;
-        margin-left: 5%;
     }
 
     .grid-buttons a {
-        padding: 10px;
+        padding: 12px;
     }
 }
