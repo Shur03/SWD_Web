@@ -42,8 +42,13 @@ public class TransactionServlet extends HttpServlet {
             if (category == null || category.isEmpty()) {
                 throw new IllegalArgumentException("Transaction category is required.");
             }
-
             double amount = Double.parseDouble(request.getParameter("amount"));
+            if (amount <= 0) { // Check for invalid amounts
+                request.setAttribute("errorMessage", "Amount must be greater than zero.");
+                request.getRequestDispatcher("/TransactionView.jsp").forward(request, response);
+                return; // Stop further processing
+            }
+//             amount = Double.parseDouble(request.getParameter("amount"));
             String description = request.getParameter("description");
             String transactionDateString = request.getParameter("transactionDate");
             LocalDate transactionDate = LocalDate.parse(transactionDateString);

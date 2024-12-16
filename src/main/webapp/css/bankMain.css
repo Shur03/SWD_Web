@@ -1,115 +1,138 @@
 @charset "UTF-8";
+
 body {
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-	margin: 0;
-	padding: 0;
-	background-color: #f0f5f9;
-	color: rgb(255, 255, 255);
-	background-image: url('../img/mnyh.jpg');
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f5f9;
+    color: rgb(255, 255, 255);
+    background-image: url('../img/mnyh.jpg');
+    background-size: cover;
+    background-position: center;
 }
 
-.header, record {
-	background-color: #4cafef;
-	color: white;
-	padding: 20px;
-	display: flex;
-	margin-left: 200px;
-	align-items: center;
-	text-align: center;
-	border-radius: 2%;
-	width: 70%;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	justify-content: space-between;
+.header, .record {
+    background-color: rgba(76, 175, 239, 0.9); /* Light blue with transparency */
+    color: white;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 2%;
+    width: 70%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-left: 15%;
 }
 
 .header img {
-	width: 60px;
-	height: 60px;
-	margin-right: 15px;
-	border-radius: 50%;
-	border: 2px solid white;
+    width: 60px;
+    height: 60px;
+    margin-right: 15px;
+    border-radius: 50%;
+    border: 2px solid white;
 }
 
 .header h1 {
-	font-size: 24px;
-	margin: 0;
+    font-size: 24px;
+    margin: 0;
 }
 
 .main-content {
-	padding: 20px;
-	max-width: 70%;
-	margin: 20px auto;
-	margin-left: 200px;
-	background-color: #9ceaec;
-	border-radius: 12px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	text-align: center;
+    padding: 20px;
+    max-width: 70%;
+    margin: 20px auto;
+    background-color: rgba(156, 234, 236, 0.9); /* Light cyan */
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
 .main-content h2 {
-	font-size: 22px;
-	margin-bottom: 15px;
-	color: #4cafef;
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #4cafef;
 }
 
 .main-content p {
-	font-size: 18px;
-	margin: 10px 0;
+    font-size: 18px;
+    margin: 10px 0;
 }
-.space{
-	width : 200px;
+
+.space {
+    width: 200px;
 }
+
 .account-info {
-	padding: 15px;
-	border-radius: 12px;
-	text-align: right;
-	/*justify-content: right;*/	
-	margin-left: auto;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: right;
+    margin-left: auto;
 }
 
 .account-info p {
-	margin: 5px 0;
+    margin: 5px 0;
 }
 
 .grid-buttons {
-	display: flex;
-	justify-content: center; /* Center horizontally */
-	align-items: center; /* Center vertically */
-	height: 100%;
-	/* Optional: ensures the container takes up full height */
-	text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
 }
 
 .grid-buttons a {
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
-	padding: 15px;
-	background-color: #4cafef;
-	color: white;
-	text-decoration: none;
-	font-size: 14px;
-	font-weight: bold;
-	border-radius: 12px;
-	transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background-color: #4cafef;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 12px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .grid-buttons a:hover {
-	background-color: #357abc;
-	transform: scale(1.05);
+    background-color: #357abc;
+    transform: scale(1.05);
 }
-/*.record{
-	color : white;
-	background-color : #4cafef;
-*/
+
+.transaction-item {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    color: #333;
+}
+
+.transaction-item p {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
 .footer {
-	margin-left: 200px;
-	align-items: center;
-	text-align: center;
-	border-radius: 2%;
-	width: 70%;
-	padding: 20px;
-	margin-top: 30px;
-	border-top: 1px solid #ddd;
-	background-color: #4cafef;
+    width: 70%;
+    padding: 20px;
+    margin-top: 30px;
+    background-color: #4cafef;
+    color: white;
+    text-align: center;
+    border-top: 1px solid #ddd;
+    border-radius: 2%;
+    margin-left: 15%;
+}
+
+@media (max-width: 768px) {
+    .header, .main-content, .footer {
+        width: 90%;
+        margin-left: 5%;
+    }
+
+    .grid-buttons a {
+        padding: 10px;
+    }
 }
