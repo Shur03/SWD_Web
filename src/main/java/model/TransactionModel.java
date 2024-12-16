@@ -40,7 +40,7 @@ public class TransactionModel {
                 try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
                         transaction.setId(generatedKeys.getInt(1));
-                        updateAccountBalance(transaction);
+//                        updateAccountBalance(transaction);
                         return true;
                     }
                 }
