@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="login-container">
-        <h2>Login</h2>
+        <h2>Welcome My Bank App</h2>
         <form action="BankLoginServlet" method="POST">
             <div class="form-group">
                 <label for="username">Username</label>
